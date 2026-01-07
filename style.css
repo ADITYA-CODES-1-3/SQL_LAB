@@ -1,20 +1,17 @@
-/* MONOCHROMATIC THEME (Black & White Only) */
+/* MONOCHROMATIC THEME (Responsive) */
 
 /* Base Reset */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-    /* Color Palette - strictly Greyscale */
-    --bg-body: #ffffff;       /* Pure White */
-    --bg-sidebar: #fafafa;    /* Very Light Grey */
-    --bg-code: #f4f4f5;       /* Light Grey for code blocks */
-    
-    --text-main: #18181b;     /* Almost Black (Soft) */
-    --text-muted: #71717a;    /* Medium Grey */
-    --text-light: #a1a1aa;    /* Light Grey */
-    
-    --border: #e4e4e7;        /* Subtle Border */
-    --accent: #000000;        /* Pure Black for active states */
+    --bg-body: #ffffff;
+    --bg-sidebar: #fafafa;
+    --bg-code: #f4f4f5;
+    --text-main: #18181b;
+    --text-muted: #71717a;
+    --text-light: #a1a1aa;
+    --border: #e4e4e7;
+    --accent: #000000;
 }
 
 body {
@@ -23,10 +20,10 @@ body {
     color: var(--text-main);
     display: flex;
     height: 100vh;
-    overflow: hidden;
+    overflow: hidden; /* Desktop: Hidden body scroll */
 }
 
-/* --- SIDEBAR --- */
+/* --- SIDEBAR (Desktop Default) --- */
 .sidebar {
     width: 260px;
     background-color: var(--bg-sidebar);
@@ -38,6 +35,7 @@ body {
     position: fixed;
     left: 0;
     top: 0;
+    z-index: 10;
 }
 
 .logo {
@@ -60,7 +58,11 @@ body {
     font-weight: 500;
 }
 
-.menu { list-style: none; flex-grow: 1; }
+.menu { 
+    list-style: none; 
+    flex-grow: 1; 
+    overflow-y: auto; /* Scroll menu if too long */
+}
 
 .menu li {
     padding: 10px 12px;
@@ -71,6 +73,7 @@ body {
     color: var(--text-muted);
     cursor: pointer;
     transition: all 0.2s;
+    white-space: nowrap;
 }
 
 .menu li:hover {
@@ -79,8 +82,8 @@ body {
 }
 
 .menu li.active {
-    background-color: #000000; /* Active item is Black */
-    color: #ffffff;            /* Text is White */
+    background-color: #000000;
+    color: #ffffff;
     font-weight: 500;
 }
 
@@ -94,12 +97,13 @@ body {
 
 /* --- MAIN CONTENT --- */
 .main-content {
-    margin-left: 260px;
+    margin-left: 260px; /* Space for fixed sidebar */
     padding: 40px 60px;
     width: calc(100% - 260px);
     height: 100vh;
-    overflow-y: auto;
+    overflow-y: auto; /* Scrollable content */
     background-color: var(--bg-body);
+    scroll-behavior: smooth;
 }
 
 header {
@@ -108,20 +112,10 @@ header {
     border-bottom: 1px solid var(--border);
 }
 
-h1 {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    color: #000;
-}
+h1 { font-size: 24px; font-weight: 700; color: #000; }
+.subtitle { color: var(--text-muted); font-size: 14px; margin-top: 8px; }
 
-.subtitle {
-    color: var(--text-muted);
-    font-size: 14px;
-    margin-top: 8px;
-}
-
-/* --- EXPERIMENT BLOCKS --- */
+/* Experiment Blocks */
 .content-block { display: none; }
 .content-block.active { display: block; animation: fadeIn 0.3s; }
 
@@ -132,6 +126,8 @@ h1 {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    gap: 10px;
 }
 
 h2 { font-size: 18px; font-weight: 600; color: #000; }
@@ -140,19 +136,20 @@ h2 { font-size: 18px; font-weight: 600; color: #000; }
     font-size: 12px;
     background: #fff;
     padding: 4px 10px;
-    border: 1px solid #000; /* Black border style */
+    border: 1px solid #000;
     color: #000;
     border-radius: 4px;
     font-weight: 500;
 }
 
-/* --- CODE CARD (The Clean Look) --- */
+/* --- CODE CARD --- */
 .code-card {
     border: 1px solid var(--border);
     border-radius: 8px;
     margin-bottom: 30px;
     background-color: #fff;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.03); /* Very subtle shadow */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    max-width: 100%; /* Prevent overflow */
 }
 
 .card-top {
@@ -168,7 +165,6 @@ h2 { font-size: 18px; font-weight: 600; color: #000; }
     font-size: 12px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
     color: var(--text-muted);
 }
 
@@ -180,51 +176,114 @@ h2 { font-size: 18px; font-weight: 600; color: #000; }
     font-size: 12px;
     cursor: pointer;
     color: var(--text-main);
-    font-weight: 500;
     transition: all 0.2s;
 }
 
-.copy-btn:hover {
-    background: #000;
-    color: #fff;
-    border-color: #000;
-}
+.copy-btn:hover { background: #000; color: #fff; border-color: #000; }
 
 pre {
     background-color: #ffffff;
-    padding: 20px;
-    overflow-x: auto;
+    padding: 15px;
+    overflow-x: auto; /* Horizontal scroll for long code */
     font-family: 'JetBrains Mono', monospace;
     font-size: 13px;
     line-height: 1.6;
     color: #333;
+    white-space: pre; /* Keep code formatting */
 }
 
-/* --- MONOCHROME SYNTAX HIGHLIGHTING --- */
-/* Everything uses weight and italics instead of color */
+/* Syntax Highlighting */
+.kwd { color: #000; font-weight: 700; }
+.str { color: #555; }
+.num { color: #000; font-weight: 600; }
+.cmt { color: #999; font-style: italic; }
+.func { color: #000; text-decoration: underline; text-decoration-color: #ccc; }
 
-.kwd { 
-    color: #000000; 
-    font-weight: 700; /* Bold Black for Keywords */
-}
 
-.str { 
-    color: #555555; 
-    font-style: normal; /* Dark Grey for Strings */
-}
+/* =========================================
+   MOBILE RESPONSIVE STYLES (Max Width: 768px)
+   ========================================= */
+@media (max-width: 768px) {
+    
+    body {
+        flex-direction: column; /* Stack top to bottom */
+        height: auto;
+        overflow: auto; /* Allow scrolling */
+    }
 
-.num { 
-    color: #000000; 
-    font-weight: 600; /* Numbers distinct */
-}
+    /* 1. Transform Sidebar to Top Nav */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: sticky; /* Sticks to top */
+        top: 0;
+        padding: 15px;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        background-color: rgba(255, 255, 255, 0.95); /* Slight transparency */
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
 
-.cmt { 
-    color: #999999; 
-    font-style: italic; /* Light Grey Italic for Comments */
-}
+    .logo {
+        margin-bottom: 15px;
+    }
 
-.func { 
-    color: #000000; 
-    text-decoration: underline; /* Underline functions */
-    text-decoration-color: #ccc;
+    /* 2. Horizontal Scroll Menu */
+    .menu {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto; /* Scroll horizontally */
+        gap: 10px;
+        padding-bottom: 5px; /* Space for scrollbar */
+        /* Hide Scrollbar visuals but allow scrolling */
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    
+    .menu::-webkit-scrollbar {
+        display: none; /* Chrome, Safari */
+    }
+
+    .menu li {
+        margin-bottom: 0;
+        background-color: #f4f4f5; /* Grey buttons */
+        border: 1px solid transparent;
+    }
+
+    .menu li.active {
+        background-color: #000;
+        border-color: #000;
+    }
+
+    .footer {
+        display: none; /* Hide footer on mobile */
+    }
+
+    /* 3. Adjust Main Content */
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        overflow-y: visible;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    /* 4. Improve Code Block Readability */
+    pre {
+        font-size: 12px;
+        padding: 12px;
+    }
+    
+    .card-top {
+        padding: 8px 12px;
+    }
 }
