@@ -3,322 +3,316 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Lab Solutions - Clean Light</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-body: #f1f5f9;       /* Light Blue-Grey Background */
-            --bg-card: #ffffff;       /* Pure White Card */
-            --text-primary: #334155;  /* Dark Grey Text */
-            --primary-color: #2563eb; /* Royal Blue */
-            --code-bg: #f8fafc;       /* Very Light Grey for Code */
-            --border-color: #e2e8f0;  /* Light Border */
-            --success-color: #10b981; /* Green for copied state */
-        }
-
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-primary);
-            padding: 40px 20px;
-            line-height: 1.5;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 40px;
-            color: #0f172a;
-            font-weight: 700;
-        }
-
-        /* Question Section */
-        .question-block {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border-color);
-        }
-
-        .q-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--bg-body);
-        }
-
-        .q-desc {
-            font-size: 0.95rem;
-            color: #64748b;
-            margin-bottom: 25px;
-        }
-
-        /* Step Label */
-        .step-label {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            margin-top: 25px;
-            display: block;
-        }
-
-        /* Code Container */
-        .code-container {
-            position: relative;
-            background-color: var(--code-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-
-        .code-container:hover {
-            border-color: #cbd5e1;
-        }
-
-        pre {
-            padding: 15px;
-            padding-right: 80px; /* Space for button */
-            overflow-x: auto;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            color: #334155;
-        }
-
-        /* Syntax Colors (Light Mode) */
-        .keyword { color: #7c3aed; font-weight: 600; } /* Purple */
-        .string { color: #d97706; } /* Amber */
-        .number { color: #059669; } /* Green */
-        .func { color: #db2777; }   /* Pink */
-
-        /* Copy Button */
-        .copy-btn {
-            position: absolute;
-            top: 50%;
-            right: 10px;
-            transform: translateY(-50%);
-            background-color: white;
-            border: 1px solid var(--border-color);
-            color: #64748b;
-            padding: 6px 12px;
-            font-size: 0.8rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .copy-btn:hover {
-            border-color: var(--primary-color);
-            color: var(--primary-color);
-            background-color: #eff6ff;
-        }
-
-        .copy-btn.copied {
-            background-color: var(--success-color);
-            color: white;
-            border-color: var(--success-color);
-        }
-
-    </style>
+    <title>DBMS Lab Manual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <h1>SQL Lab Solutions</h1>
-
-    <div class="question-block">
-        <div class="q-title">1. Employee Table & Operators</div>
-        <p class="q-desc">Creation, Insertion of 10 rows, Comparison, Logical, and Set Operators.</p>
-
-        <span class="step-label">Step 1: Create Table</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">CREATE TABLE</span> Employee (
-    Name <span class="keyword">VARCHAR</span>(50),
-    Designation <span class="keyword">VARCHAR</span>(30),
-    Gender <span class="keyword">CHAR</span>(1),
-    Age <span class="keyword">INT</span>,
-    DOJ <span class="keyword">DATE</span>,
-    Salary <span class="keyword">DECIMAL</span>(10,2)
-);</pre>
+    <nav class="sidebar">
+        <div class="logo">
+            SQL <span class="badge">Lab</span>
         </div>
+        <ul class="menu">
+            <li class="active" onclick="showExp('exp1', this)">1. Employee DB</li>
+            <li onclick="showExp('exp2', this)">2. TCL Commands</li>
+            <li onclick="showExp('exp3', this)">3. Single Row Func</li>
+            <li onclick="showExp('exp4', this)">4. Aggregate Func</li>
+            <li onclick="showExp('exp5', this)">5. Bus Reservation</li>
+            <li onclick="showExp('exp6', this)">6. Joins Setup</li>
+        </ul>
+        <div class="footer"></div>
+    </nav>
 
-        <span class="step-label">Step 2: Insert 10 Rows</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">INSERT INTO</span> Employee <span class="keyword">VALUES</span> 
-(<span class="string">'Arun'</span>, <span class="string">'Manager'</span>, <span class="string">'M'</span>, <span class="number">35</span>, <span class="string">'2020-01-15'</span>, <span class="number">60000</span>),
-(<span class="string">'Banu'</span>, <span class="string">'Developer'</span>, <span class="string">'F'</span>, <span class="number">28</span>, <span class="string">'2021-03-10'</span>, <span class="number">45000</span>),
-(<span class="string">'Charles'</span>, <span class="string">'Analyst'</span>, <span class="string">'M'</span>, <span class="number">30</span>, <span class="string">'2019-06-20'</span>, <span class="number">50000</span>),
-(<span class="string">'Divya'</span>, <span class="string">'HR'</span>, <span class="string">'F'</span>, <span class="number">26</span>, <span class="string">'2022-08-01'</span>, <span class="number">35000</span>),
-(<span class="string">'Ezra'</span>, <span class="string">'Tester'</span>, <span class="string">'M'</span>, <span class="number">24</span>, <span class="string">'2023-01-05'</span>, <span class="number">25000</span>),
-(<span class="string">'Fahad'</span>, <span class="string">'Developer'</span>, <span class="string">'M'</span>, <span class="number">29</span>, <span class="string">'2021-05-15'</span>, <span class="number">48000</span>),
-(<span class="string">'Gita'</span>, <span class="string">'Manager'</span>, <span class="string">'F'</span>, <span class="number">38</span>, <span class="string">'2018-11-12'</span>, <span class="number">70000</span>),
-(<span class="string">'Hari'</span>, <span class="string">'Tester'</span>, <span class="string">'M'</span>, <span class="number">25</span>, <span class="string">'2023-02-20'</span>, <span class="number">26000</span>),
-(<span class="string">'Indu'</span>, <span class="string">'Analyst'</span>, <span class="string">'F'</span>, <span class="number">27</span>, <span class="string">'2020-09-30'</span>, <span class="number">52000</span>),
-(<span class="string">'Jack'</span>, <span class="string">'Developer'</span>, <span class="string">'M'</span>, <span class="number">32</span>, <span class="string">'2019-12-01'</span>, <span class="number">55000</span>);</pre>
-        </div>
-
-        <span class="step-label">Step 3: Comparison Query (> 40k Salary)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Employee 
-<span class="keyword">WHERE</span> Salary > <span class="number">40000</span>;</pre>
-        </div>
-
-        <span class="step-label">Step 4: Logical Query (Male AND Manager)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> Employee 
-<span class="keyword">WHERE</span> Gender = <span class="string">'M'</span> <span class="keyword">AND</span> Designation = <span class="string">'Manager'</span>;</pre>
-        </div>
-
-        <span class="step-label">Step 5: Set Operator (UNION)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">SELECT</span> Name <span class="keyword">FROM</span> Employee <span class="keyword">WHERE</span> Designation = <span class="string">'Manager'</span>
-<span class="keyword">UNION</span>
-<span class="keyword">SELECT</span> Name <span class="keyword">FROM</span> Employee <span class="keyword">WHERE</span> Designation = <span class="string">'Analyst'</span>;</pre>
-        </div>
-    </div>
-
-    <div class="question-block">
-        <div class="q-title">2. TCL Commands (Commit & Rollback)</div>
-        <p class="q-desc">Performing Transaction Control Statements.</p>
-
-        <span class="step-label">Step 1: Create EMP Table</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">CREATE TABLE</span> EMP (
-    Empno <span class="keyword">INT PRIMARY KEY</span>,
-    Ename <span class="keyword">VARCHAR</span>(30),
-    Sal <span class="keyword">DECIMAL</span>(10,2)
-);</pre>
-        </div>
-
-        <span class="step-label">Step 2: Insert & Commit (Save)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">INSERT INTO</span> EMP <span class="keyword">VALUES</span> (<span class="number">101</span>, <span class="string">'Ravi'</span>, <span class="number">25000</span>);
-<span class="keyword">COMMIT</span>;</pre>
-        </div>
-
-        <span class="step-label">Step 3: Delete & Rollback (Undo)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">DELETE FROM</span> EMP <span class="keyword">WHERE</span> Empno = <span class="number">101</span>;
-<span class="keyword">ROLLBACK</span>;
-<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> EMP;</pre>
-        </div>
-    </div>
-
-    <div class="question-block">
-        <div class="q-title">3. Single Row Functions</div>
-        <p class="q-desc">String, Numeric, and Date functions.</p>
-
-        <span class="step-label">Step 1: String Functions (Upper, Length)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">SELECT</span> Name, <span class="func">UPPER</span>(Name), <span class="func">LENGTH</span>(Name) 
-<span class="keyword">FROM</span> Employee;</pre>
-        </div>
-
-        <span class="step-label">Step 2: Numeric Function (Round)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">SELECT</span> Name, Salary, <span class="func">ROUND</span>(Salary, <span class="number">-3</span>) 
-<span class="keyword">FROM</span> Employee;</pre>
-        </div>
-    </div>
-
-    <div class="question-block">
-        <div class="q-title">4. Aggregation & Grouping</div>
-        <p class="q-desc">Using GROUP BY, HAVING, and Aggregate functions.</p>
-
-        <span class="step-label">Step 1: Group By Designation</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">SELECT</span> Designation, <span class="func">COUNT</span>(*) <span class="keyword">AS</span> Count, <span class="func">AVG</span>(Salary) <span class="keyword">AS</span> Avg_Sal
-<span class="keyword">FROM</span> Employee
-<span class="keyword">GROUP BY</span> Designation;</pre>
-        </div>
-
-        <span class="step-label">Step 2: Having Clause (Filter Groups)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">SELECT</span> Designation, <span class="func">COUNT</span>(*) 
-<span class="keyword">FROM</span> Employee
-<span class="keyword">GROUP BY</span> Designation
-<span class="keyword">HAVING</span> <span class="func">COUNT</span>(*) > <span class="number">1</span>;</pre>
-        </div>
-    </div>
-
-    <div class="question-block">
-        <div class="q-title">5. Bus Reservation System</div>
-        <p class="q-desc">Creating tables with Constraints.</p>
-
-        <span class="step-label">Step 1: Create Bus Table (Check Constraint)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">CREATE TABLE</span> Bus_Details (
-    Bus_ID <span class="keyword">INT PRIMARY KEY</span>,
-    Type <span class="keyword">VARCHAR</span>(10) <span class="keyword">CHECK</span> (Type <span class="keyword">IN</span> (<span class="string">'AC'</span>, <span class="string">'NON-AC'</span>))
-);</pre>
-        </div>
-
-        <span class="step-label">Step 2: Create Passenger Table (Foreign Key)</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">CREATE TABLE</span> Passenger (
-    Ticket_ID <span class="keyword">INT PRIMARY KEY</span>,
-    P_Name <span class="keyword">VARCHAR</span>(50),
-    Bus_ID <span class="keyword">INT</span>,
-    <span class="keyword">FOREIGN KEY</span> (Bus_ID) <span class="keyword">REFERENCES</span> Bus_Details(Bus_ID)
-);</pre>
-        </div>
-
-        <span class="step-label">Step 3: View Constraints</span>
-        <div class="code-container">
-            <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-            <pre><span class="keyword">SELECT</span> constraint_name, constraint_type 
-<span class="keyword">FROM</span> user_constraints 
-<span class="keyword">WHERE</span> table_name = <span class="string">'BUS_DETAILS'</span>;</pre>
-        </div>
-    </div>
-
-</div>
-
-<script>
-    function copyCode(btn) {
-        // Find the code inside the pre tag associated with this button
-        const codeText = btn.nextElementSibling.innerText;
-
-        navigator.clipboard.writeText(codeText).then(() => {
-            const originalText = btn.innerText;
-            btn.innerText = "Copied!";
-            btn.classList.add("copied");
+    <main class="main-content">
+        
+        <header>
+            <h1>DBMS Lab Solutions</h1>
             
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.classList.remove("copied");
-            }, 1500);
-        });
-    }
-</script>
+        </header>
 
+        <section id="exp1" class="content-block active">
+            <div class="block-header">
+                <h2>1. Employee Database & Operators</h2>
+                <span class="tag">Comparison & Sets</span>
+            </div>
+            
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">1. Create Table</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">CREATE TABLE</span> Employee (
+    Empno <span class="kwd">NUMBER PRIMARY KEY</span>,
+    Empname <span class="kwd">VARCHAR2</span>(20),
+    Designation <span class="kwd">VARCHAR2</span>(30),
+    Gender <span class="kwd">VARCHAR2</span>(6),
+    Age <span class="kwd">NUMBER</span>,
+    Doj <span class="kwd">DATE</span>,
+    Salary <span class="kwd">NUMBER</span>
+);</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">2. Insert 10 Rows</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(101, <span class="str">'Arun'</span>, <span class="str">'Manager'</span>, <span class="str">'Male'</span>, 30, <span class="str">'12-JAN-14'</span>, <span class="num">35000</span>);
+<span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(102, <span class="str">'Banu'</span>, <span class="str">'HR'</span>, <span class="str">'Female'</span>, 28, <span class="str">'15-MAR-15'</span>, <span class="num">25000</span>);
+<span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(103, <span class="str">'Dev'</span>, <span class="str">'Dev'</span>, <span class="str">'Male'</span>, 25, <span class="str">'10-JUL-16'</span>, <span class="num">20000</span>);
+<span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(104, <span class="str">'Pooja'</span>, <span class="str">'Dev'</span>, <span class="str">'Female'</span>, 27, <span class="str">'14-APR-15'</span>, <span class="num">25000</span>);
+<span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(105, <span class="str">'Peter'</span>, <span class="str">'Manager'</span>, <span class="str">'Male'</span>, 35, <span class="str">'01-FEB-15'</span>, <span class="num">35000</span>);
+<span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(106, <span class="str">'Sam'</span>, <span class="str">'Tester'</span>, <span class="str">'Male'</span>, 24, <span class="str">'20-AUG-17'</span>, <span class="num">15000</span>);
+<span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(107, <span class="str">'Tara'</span>, <span class="str">'HR'</span>, <span class="str">'Female'</span>, 29, <span class="str">'11-NOV-14'</span>, <span class="num">26000</span>);
+<span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(108, <span class="str">'Uday'</span>, <span class="str">'Admin'</span>, <span class="str">'Male'</span>, 32, <span class="str">'05-DEC-13'</span>, <span class="num">30000</span>);
+<span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(109, <span class="str">'Viswa'</span>, <span class="str">'Dev'</span>, <span class="str">'Male'</span>, 26, <span class="str">'09-SEP-16'</span>, <span class="num">22000</span>);
+<span class="kwd">INSERT INTO</span> Employee <span class="kwd">VALUES</span>(110, <span class="str">'Zara'</span>, <span class="str">'Tester'</span>, <span class="str">'Female'</span>, 23, <span class="str">'22-JAN-18'</span>, <span class="num">18000</span>);</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">3. Comparison (Salary > 30000)</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> * <span class="kwd">FROM</span> Employee <span class="kwd">WHERE</span> Salary > <span class="num">30000</span>;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">4. Logical (Range)</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> * <span class="kwd">FROM</span> Employee 
+<span class="kwd">WHERE</span> Salary > <span class="num">20000</span> <span class="kwd">AND</span> Salary < <span class="num">40000</span>;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">5. Pattern (Ends with 'a')</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> * <span class="kwd">FROM</span> Employee <span class="kwd">WHERE</span> Empname <span class="kwd">LIKE</span> <span class="str">'%a'</span>;</code></pre>
+            </div>
+
+             <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">6. Set Operator (UNION)</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> * <span class="kwd">FROM</span> Employee <span class="kwd">WHERE</span> Salary > <span class="num">30000</span>
+<span class="kwd">UNION</span>
+<span class="kwd">SELECT</span> * <span class="kwd">FROM</span> Employee <span class="kwd">WHERE</span> Age < <span class="num">26</span>;</code></pre>
+            </div>
+            
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">7. Set Operator (INTERSECT)</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> * <span class="kwd">FROM</span> Employee <span class="kwd">WHERE</span> Salary > <span class="num">30000</span>
+<span class="kwd">INTERSECT</span>
+<span class="kwd">SELECT</span> * <span class="kwd">FROM</span> Employee <span class="kwd">WHERE</span> Age < <span class="num">35</span>;</code></pre>
+            </div>
+        </section>
+
+        <section id="exp2" class="content-block">
+            <div class="block-header">
+                <h2>2. Transaction Control (TCL)</h2>
+                <span class="tag">Commit & Rollback</span>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">1. Create EMP Table</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">CREATE TABLE</span> EMP (
+    Empno <span class="kwd">NUMBER PRIMARY KEY</span>,
+    Ename <span class="kwd">VARCHAR2</span>(10),
+    Sal <span class="kwd">NUMBER</span>(7,2)
+);</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">2. Insert & Commit</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">INSERT INTO</span> EMP <span class="kwd">VALUES</span>(1, <span class="str">'Ravi'</span>, <span class="num">5000</span>);
+<span class="kwd">COMMIT</span>;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">3. Insert, Rollback & View</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">INSERT INTO</span> EMP <span class="kwd">VALUES</span>(2, <span class="str">'Kumar'</span>, <span class="num">6000</span>);
+<span class="kwd">ROLLBACK</span>;
+
+<span class="kwd">SELECT</span> * <span class="kwd">FROM</span> EMP;</code></pre>
+            </div>
+        </section>
+
+        <section id="exp3" class="content-block">
+            <div class="block-header">
+                <h2>3. Single Row Functions</h2>
+                <span class="tag">String, Date, Numeric</span>
+            </div>
+            
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">a) Current Date</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> SYSDATE <span class="kwd">FROM</span> dual;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">b) Round Salary (+15%)</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> Ename, Sal, <span class="func">ROUND</span>(Sal * 1.15) <span class="kwd">AS</span> New_Sal 
+<span class="kwd">FROM</span> EMP;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">c) Initcap & Length</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> <span class="func">INITCAP</span>(Ename), <span class="func">LENGTH</span>(Ename) <span class="kwd">FROM</span> EMP;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">d) Months Worked</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> Ename, <span class="func">TRUNC</span>(<span class="func">MONTHS_BETWEEN</span>(SYSDATE, Hiredate)) 
+<span class="kwd">AS</span> Exp_Months <span class="kwd">FROM</span> EMP;</code></pre>
+            </div>
+        </section>
+
+        <section id="exp4" class="content-block">
+            <div class="block-header">
+                <h2>4. Aggregate Functions</h2>
+                <span class="tag">Group By & Having</span>
+            </div>
+            
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">1. Min, Max, Avg, Sum</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> <span class="func">MIN</span>(Sal), <span class="func">MAX</span>(Sal), <span class="func">AVG</span>(Sal), <span class="func">SUM</span>(Sal) <span class="kwd">FROM</span> EMP;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">2. Group By Job</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> Job, <span class="func">COUNT</span>(*) <span class="kwd">FROM</span> EMP <span class="kwd">GROUP BY</span> Job;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">3. Having Clause (Count > 1)</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> Deptno, <span class="func">COUNT</span>(*) <span class="kwd">FROM</span> EMP 
+<span class="kwd">GROUP BY</span> Deptno 
+<span class="kwd">HAVING</span> <span class="func">COUNT</span>(*) > <span class="num">1</span>;</code></pre>
+            </div>
+        </section>
+
+        <section id="exp5" class="content-block">
+            <div class="block-header">
+                <h2>5. Bus Reservation System</h2>
+                <span class="tag">Constraints (PK/FK)</span>
+            </div>
+            
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">1. Create Bus Table</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">CREATE TABLE</span> Bus (
+    Routeno <span class="kwd">NUMBER PRIMARY KEY</span>,
+    Source <span class="kwd">VARCHAR2</span>(20),
+    Destination <span class="kwd">VARCHAR2</span>(20)
+);</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">2. Create Passenger Table</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">CREATE TABLE</span> Passenger (
+    Pid <span class="kwd">NUMBER PRIMARY KEY</span>,
+    Pname <span class="kwd">VARCHAR2</span>(20),
+    Gender <span class="kwd">VARCHAR2</span>(6)
+);</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">3. Create Booking Table</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">CREATE TABLE</span> Booking (
+    Pid <span class="kwd">NUMBER REFERENCES</span> Passenger(Pid),
+    Routeno <span class="kwd">NUMBER REFERENCES</span> Bus(Routeno),
+    JDate <span class="kwd">DATE</span>,
+    <span class="kwd">PRIMARY KEY</span>(Pid, Routeno)
+);</code></pre>
+            </div>
+        </section>
+
+        <section id="exp6" class="content-block">
+            <div class="block-header">
+                <h2>6. Implementation of Joins</h2>
+                <span class="tag">Inner, Outer, Self</span>
+            </div>
+            
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">1. Inner Join</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> S.Sname, B.Bname 
+<span class="kwd">FROM</span> Sailors S 
+<span class="kwd">INNER JOIN</span> Reserves R <span class="kwd">ON</span> S.Sid = R.Sid
+<span class="kwd">INNER JOIN</span> Boats B <span class="kwd">ON</span> R.Bid = B.Bid;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">2. Left Join</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> S.Sname, R.Day 
+<span class="kwd">FROM</span> Sailors S 
+<span class="kwd">LEFT JOIN</span> Reserves R <span class="kwd">ON</span> S.Sid = R.Sid;</code></pre>
+            </div>
+
+            <div class="code-card">
+                <div class="card-top">
+                    <span class="step-name">3. Right Join</span>
+                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                </div>
+                <pre><code><span class="kwd">SELECT</span> S.Sname, B.Bname 
+<span class="kwd">FROM</span> Sailors S 
+<span class="kwd">RIGHT JOIN</span> Reserves R <span class="kwd">ON</span> S.Sid = R.Sid
+<span class="kwd">RIGHT JOIN</span> Boats B <span class="kwd">ON</span> R.Bid = B.Bid;</code></pre>
+            </div>
+        </section>
+
+    </main>
+    <script src="script.js"></script>
 </body>
 </html>

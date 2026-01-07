@@ -1,0 +1,230 @@
+/* MONOCHROMATIC THEME (Black & White Only) */
+
+/* Base Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    /* Color Palette - strictly Greyscale */
+    --bg-body: #ffffff;       /* Pure White */
+    --bg-sidebar: #fafafa;    /* Very Light Grey */
+    --bg-code: #f4f4f5;       /* Light Grey for code blocks */
+    
+    --text-main: #18181b;     /* Almost Black (Soft) */
+    --text-muted: #71717a;    /* Medium Grey */
+    --text-light: #a1a1aa;    /* Light Grey */
+    
+    --border: #e4e4e7;        /* Subtle Border */
+    --accent: #000000;        /* Pure Black for active states */
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.logo {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 30px;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge {
+    background: #000;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.menu { list-style: none; flex-grow: 1; }
+
+.menu li {
+    padding: 10px 12px;
+    margin-bottom: 4px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.menu li:hover {
+    background-color: #e4e4e7;
+    color: var(--text-main);
+}
+
+.menu li.active {
+    background-color: #000000; /* Active item is Black */
+    color: #ffffff;            /* Text is White */
+    font-weight: 500;
+}
+
+.footer {
+    font-size: 12px;
+    color: var(--text-light);
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    padding-top: 15px;
+}
+
+/* --- MAIN CONTENT --- */
+.main-content {
+    margin-left: 260px;
+    padding: 40px 60px;
+    width: calc(100% - 260px);
+    height: 100vh;
+    overflow-y: auto;
+    background-color: var(--bg-body);
+}
+
+header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: #000;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* --- EXPERIMENT BLOCKS --- */
+.content-block { display: none; }
+.content-block.active { display: block; animation: fadeIn 0.3s; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+.block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+h2 { font-size: 18px; font-weight: 600; color: #000; }
+
+.tag {
+    font-size: 12px;
+    background: #fff;
+    padding: 4px 10px;
+    border: 1px solid #000; /* Black border style */
+    color: #000;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* --- CODE CARD (The Clean Look) --- */
+.code-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 30px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03); /* Very subtle shadow */
+}
+
+.card-top {
+    background-color: #fafafa;
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.step-name {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+}
+
+.copy-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    color: var(--text-main);
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+pre {
+    background-color: #ffffff;
+    padding: 20px;
+    overflow-x: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* --- MONOCHROME SYNTAX HIGHLIGHTING --- */
+/* Everything uses weight and italics instead of color */
+
+.kwd { 
+    color: #000000; 
+    font-weight: 700; /* Bold Black for Keywords */
+}
+
+.str { 
+    color: #555555; 
+    font-style: normal; /* Dark Grey for Strings */
+}
+
+.num { 
+    color: #000000; 
+    font-weight: 600; /* Numbers distinct */
+}
+
+.cmt { 
+    color: #999999; 
+    font-style: italic; /* Light Grey Italic for Comments */
+}
+
+.func { 
+    color: #000000; 
+    text-decoration: underline; /* Underline functions */
+    text-decoration-color: #ccc;
+}
